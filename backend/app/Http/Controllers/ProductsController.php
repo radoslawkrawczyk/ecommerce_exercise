@@ -37,4 +37,24 @@ class ProductsController extends Controller
         return $data;
 
     }
+
+    public function products() {
+        return Products::all();
+    }
+
+    public function productDetails($id) {
+        $product = Products::where('id', $id)->first();
+        return $product;
+    }
+
+    public function productsSearch(Request $request) {
+        $search = $request->input('search');
+
+        $products = Products::query()
+        ->where('product_name', 'LIKE', "%{$search}%")
+        ->orWhere('description', 'LIKE', "%{$search}%")
+        ->get();
+
+        return $products;
+    }
 }

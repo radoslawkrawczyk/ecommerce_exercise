@@ -8,4 +8,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 
-Route::post('/load-csv', 'App\Http\Controllers\ProductsController@loadCsv');
+Route::post('/products/add', 'App\Http\Controllers\ProductsController@loadCsv');
+Route::get('/products', 'App\Http\Controllers\ProductsController@products');
+Route::get('/product/{id}', 'App\Http\Controllers\ProductsController@productDetails');
+Route::post('/products/search','App\Http\Controllers\ProductsController@productsSearch');
