@@ -6,6 +6,7 @@ import {
 } from "react-router-dom";
 import Products from './components/Products';
 import Load from './components/Load';
+import Details from './components/Details';
 
 function App() {
   return (
@@ -18,6 +19,9 @@ function App() {
           </Route>
           <Route exact path="/load">
             <Load />
+          </Route>
+          <Route exact path="/products/:id">
+            <Details />
           </Route>
         </Switch>
       </div>
