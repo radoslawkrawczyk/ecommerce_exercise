@@ -9,17 +9,21 @@ import {
   Switch,
   Route,
   Link
-} from "react-router-dom"; 
+} from "react-router-dom";
 import axios from 'axios';
+import { Provider } from 'react-redux'
+import store from './store'
 
 axios.defaults.baseURL = 'http://127.0.0.1:8001/api/';
 
 
 ReactDOM.render(
   <React.StrictMode>
-    <Router>
-      <App />
-    </Router>
+    <Provider store={store}>
+      <Router>
+        <App />
+      </Router>
+    </Provider>
   </React.StrictMode>,
   document.getElementById('root')
 );

@@ -9,6 +9,7 @@ import Load from './components/Load';
 import Details from './components/Details';
 
 function App() {
+
   return (
     <div>
       <Navbar />

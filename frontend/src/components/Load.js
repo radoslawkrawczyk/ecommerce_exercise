@@ -1,8 +1,13 @@
 import axios from 'axios';
 import { useState } from 'react';
 import Loading from './Loading';
+import { useDispatch, connect } from 'react-redux';
+import { checkIfUploaded } from '../actions';
 
-export default function Load() {
+
+function Load() {
+    const dispatch = useDispatch();
+
     const [loading, setLoading] = useState(false);
     const [file, setFile] = useState(null);
     const [succcess, setSuccess] = useState(false);
@@ -15,6 +20,8 @@ export default function Load() {
         axios.post('/products/add', formData, {headers: {'Content-Type': 'multipart/form-data'}}).then(r => {
             setLoading(false); 
             setSuccess(true);
+            localStorage.setItem("uploadedCsv", true);
+            dispatch(checkIfUploaded());
 
         }).catch(err => {
             console.log(err.response.data);
@@ -36,3 +43,10 @@ export default function Load() {
         </div>
     </form>);
 }
+
+
+const mapStateToProps = state => ({
+    isCsvUploaded: state.isCsvUploaded
+});
+
+export default connect(mapStateToProps, { checkIfUploaded })(Load);

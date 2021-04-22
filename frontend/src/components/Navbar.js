@@ -1,6 +1,16 @@
-import {Link} from 'react-router-dom';
-function Navbar() {
+import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
 
+import { useDispatch } from 'react-redux';
+import { useEffect } from 'react';
+import { checkIfUploaded } from '../actions';
+
+function Navbar(props) {
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        dispatch(checkIfUploaded());
+    })
     return (
         <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
             <Link className="navbar-brand" to="/">eCommerce Exercise</Link>
@@ -12,10 +22,18 @@ function Navbar() {
                     <Link className="nav-link" to="/">Products</Link>
                     <Link className="nav-link" to="/load">Load CSV</Link>
                 </div>
+                <form className="form-inline">
+                    {props.isCsvUploaded ? (<button className="btn btn-outline-success" type="button">CSV Uploaded</button>) : ((<button className="btn btn-outline-warning" type="button">CSV not uploaded</button>))}
+                </form>
             </div>
+
+
         </nav>
     )
 }
 
+const mapStateToProps = state => ({
+    isCsvUploaded: state.isCsvUploaded
+});
 
-export default Navbar;
+export default connect(mapStateToProps, { checkIfUploaded })(Navbar);
