@@ -13,7 +13,8 @@ This project uses Laravel and React with React Redux
 ## Frontend Installation
 1. `cd frontend/` - Same as above but with the frontend catalog
 2. `yarn install` - Install node_modules
-3. `yarn start` - Start the local app on port 3000
+3. Edit `src/index.js` line 17 to provide the right API URL
+4. `yarn start` - Start the local app on port 3000
 
 ## REST Route list
 `POST /api/products/add` - Route expecting a `csv` field with a CSV file. Sample CSV file is provided
